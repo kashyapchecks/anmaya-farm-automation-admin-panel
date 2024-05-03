@@ -74,7 +74,7 @@ function NodeCard({
               <PowerRoundedIcon color="primary" />
             </ListItemIcon>
             <ListItemText>
-              {nodePowerConsumption ? nodePowerConsumption : 0}W Power
+              {nodePowerConsumption ? nodePowerConsumption : 0} W Power
             </ListItemText>
           </ListItem>
           <ListItem sx={{ padding: 0 }}>
