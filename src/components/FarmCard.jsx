@@ -1,23 +1,21 @@
 import * as React from "react";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+
 import {
-  IconButton,
+  Card,
+  CardContent,
+  CardMedia,
+  CardActions,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
-  Box,
+  Button,
+  Typography,
 } from "@mui/material";
 
 import DevicesRoundedIcon from "@mui/icons-material/DevicesRounded";
 import PowerRoundedIcon from "@mui/icons-material/PowerRounded";
 import WaterDropRoundedIcon from "@mui/icons-material/WaterDropRounded";
-import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 
 import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
@@ -59,7 +57,7 @@ function FarmCard({
               <PowerRoundedIcon color="primary" />
             </ListItemIcon>
             <ListItemText>
-              {powerConsumption ? powerConsumption : 0}W Power
+              {powerConsumption ? powerConsumption : 0} W Power
             </ListItemText>
           </ListItem>
           <ListItem sx={{ padding: 0 }}>
@@ -67,7 +65,7 @@ function FarmCard({
               <WaterDropRoundedIcon color="primary" />
             </ListItemIcon>
             <ListItemText>
-              {waterConsumption ? waterConsumption : 0}L Water
+              {waterConsumption ? waterConsumption : 0} L Water
             </ListItemText>
           </ListItem>
         </List>

@@ -1,13 +1,7 @@
 import React, { useState } from "react";
-import {
-  Dialog,
-  DialogTitle,
-  Box,
-  Button,
-  Input,
-  TextField,
-} from "@mui/material";
+import { Dialog, DialogTitle, Box, Button, TextField } from "@mui/material";
 
+//components
 import FormLoaderAnimation from "./FormLoaderAnimation";
 import CustomSnackBar from "./CustomSnackBar";
 
@@ -45,7 +39,6 @@ function AddForm({
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(formData);
     const isFormValid = formValidater();
 
     if (isFormValid) {
@@ -76,7 +69,6 @@ function AddForm({
           setOpen(false);
         }
       } catch (error) {
-        console.log(error);
       } finally {
         setLoaderAnimation(false);
       }
@@ -89,15 +81,15 @@ function AddForm({
         <DialogTitle>{title}</DialogTitle>
         <Box
           sx={{
-            // border: "2px solid red",
             marginLeft: 3,
             marginRight: 3,
             marginBottom: 3,
           }}
         >
           <Box component="form" noValidate fullWidth autoComplete="off">
-            {fields.map((value) => (
+            {fields.map((value, index) => (
               <TextField
+                key={index}
                 id="outlined-basic"
                 label={formError.name ? formError.name : value.label}
                 variant="outlined"
@@ -111,7 +103,6 @@ function AddForm({
 
           <Box
             sx={{
-              // border: "2px solid green",
               display: "flex",
               justifyContent: "end",
               alignItems: "center",

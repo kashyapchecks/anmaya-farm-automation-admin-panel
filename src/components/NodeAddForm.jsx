@@ -4,7 +4,6 @@ import {
   DialogTitle,
   Box,
   Button,
-  Input,
   InputLabel,
   MenuItem,
   FormControl,
@@ -111,7 +110,6 @@ function NodeAddForm({
         <DialogTitle>New Node</DialogTitle>
         <Box
           sx={{
-            // border: "2px solid red",
             marginLeft: 3,
             marginRight: 3,
             marginBottom: 3,
@@ -139,8 +137,10 @@ function NodeAddForm({
                 error={formData.nodePinError ? true : false}
                 onChange={handleInputChange}
               >
-                {nodePins?.map((pin) => (
-                  <MenuItem value={pin}>{pin}</MenuItem>
+                {nodePins?.map((pin, index) => (
+                  <MenuItem key={index} value={pin}>
+                    {pin}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -158,8 +158,10 @@ function NodeAddForm({
                 error={formData.nodeManualControlPinError ? true : false}
                 onChange={handleInputChange}
               >
-                {nodeManualControlPins?.map((pin) => (
-                  <MenuItem value={pin}>{pin}</MenuItem>
+                {nodeManualControlPins?.map((pin, index) => (
+                  <MenuItem key={index} value={pin}>
+                    {pin}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -167,7 +169,6 @@ function NodeAddForm({
 
           <Box
             sx={{
-              // border: "2px solid green",
               display: "flex",
               justifyContent: "end",
               alignItems: "center",

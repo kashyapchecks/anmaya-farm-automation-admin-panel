@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import RouterRoundedIcon from "@mui/icons-material/RouterRounded";
 import {
   Card,
   CardActions,
@@ -12,7 +11,6 @@ import {
   ListItemIcon,
   ListItemText,
   Typography,
-  Switch,
   Button,
 } from "@mui/material";
 
@@ -45,7 +43,7 @@ function DeviceCard({ id, deviceName, nodeCount, powerConsumption }) {
               <PowerRoundedIcon color="primary" />
             </ListItemIcon>
             <ListItemText>
-              {powerConsumption ? powerConsumption : 0}W Power
+              {powerConsumption ? powerConsumption : 0} W Power
             </ListItemText>
           </ListItem>
         </List>

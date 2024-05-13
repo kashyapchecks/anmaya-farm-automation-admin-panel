@@ -1,28 +1,14 @@
-import React, { useCallback, useEffect, useState } from "react";
-import {
-  AppBar,
-  Box,
-  Stack,
-  IconButton,
-  Toolbar,
-  Input,
-  Button,
-  Typography,
-  Grid,
-  Fab,
-  Dialog,
-  DialogTitle,
-} from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Box, Typography, Grid } from "@mui/material";
+import styled from "@emotion/styled";
 
 //components
 import FarmCard from "../components/FarmCard";
 import AddForm from "../components/AddForm";
-import styled from "@emotion/styled";
 import LoaderAnimation from "../components/LoaderAnimation";
 import CustomSnackBar from "../components/CustomSnackBar";
 
 const FarmGridContainer = styled(Box)(({ theme }) => ({
-  // border: "2px solid black",
   width: "100%",
   flex: 1,
   padding: 10,
@@ -37,13 +23,13 @@ const FarmGridContainer = styled(Box)(({ theme }) => ({
 function FarmGrid({ dialogBox, setDialogBox }) {
   const [pageRefresh, setPageRefresh] = useState(false);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [farms, setFarms] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [snackBarData, setSnackBarData] = useState({ status: "", message: "" });
+  const [snackBarOpen, setSnackBarOpen] = useState(false);
 
   const handleWindowResize = () => {
     setWindowHeight(window.innerHeight);
-    setWindowWidth(window.innerWidth);
   };
   const fetchFarms = async () => {
     try {
@@ -54,7 +40,18 @@ function FarmGrid({ dialogBox, setDialogBox }) {
         setFarms(result.farms);
       }, 1000);
     } catch (error) {
-      console.log(error);
+      setSnackBarData({
+        status: "error",
+        message: "Server communication failed",
+      });
+      setSnackBarOpen(true);
+      setTimeout(() => {
+        setSnackBarData({
+          status: "error",
+          message: "Check your internet connection",
+        });
+        setSnackBarOpen(true);
+      }, 3000);
     } finally {
       setTimeout(() => {
         setLoading(false);
@@ -71,7 +68,6 @@ function FarmGrid({ dialogBox, setDialogBox }) {
 
   useEffect(() => {
     fetchFarms();
-    console.log("called");
   }, []);
 
   useEffect(() => {
@@ -87,16 +83,14 @@ function FarmGrid({ dialogBox, setDialogBox }) {
         container
         gap={5}
         sx={{
-          // border: "10px solid red",
           maxHeight: `${windowHeight - 260}px`,
-          // width: "100%",
           padding: 0,
           overflow: "auto",
           marginTop: 3,
         }}
       >
         {farms?.map((farm, index) => (
-          <Grid item>
+          <Grid item key={index}>
             <FarmCard
               id={farm.farm_id}
               name={farm.farm_name}
@@ -118,6 +112,12 @@ function FarmGrid({ dialogBox, setDialogBox }) {
         setPageRefresh={setPageRefresh}
       />
       <LoaderAnimation open={loading} />
+      <CustomSnackBar
+        status={snackBarData.status}
+        message={snackBarData.message}
+        open={snackBarOpen}
+        setOpen={setSnackBarOpen}
+      />
     </FarmGridContainer>
   );
 }

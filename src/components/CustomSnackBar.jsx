@@ -1,13 +1,12 @@
-import * as React from "react";
+import React from "react";
 
-import { Button, Snackbar, Alert } from "@mui/material";
+import { Snackbar, Alert } from "@mui/material";
 
 export default function CustomSnackBar({ status, message, open, setOpen }) {
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
-
     setOpen(false);
   };
 

@@ -1,6 +1,6 @@
 import React from "react";
-import MenuIcon from "@mui/icons-material/Menu";
 import { AppBar, Toolbar, IconButton, Typography, Button } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 
 function NavBar({ setDrawerOpen, drawerOpen }) {
   return (
@@ -28,7 +28,6 @@ function NavBar({ setDrawerOpen, drawerOpen }) {
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Anmaya
         </Typography>
-        <Button color="inherit">Login</Button>
       </Toolbar>
     </AppBar>
   );

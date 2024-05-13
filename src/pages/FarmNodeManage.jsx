@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { AppBar, Box, Stack, IconButton, Toolbar, Input } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Stack,
+  IconButton,
+  Toolbar,
+  Input,
+  Tooltip,
+} from "@mui/material";
 import styled from "@emotion/styled";
 
 //icons
@@ -9,6 +17,7 @@ import LinkRoundedIcon from "@mui/icons-material/LinkRounded";
 import LinkOffRoundedIcon from "@mui/icons-material/LinkOffRounded";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 
+//pages
 import FarmGrid from "./FarmGrid";
 import DeviceGrid from "./DeviceGrid";
 import NodeGrid from "./NodeGrid";
@@ -50,14 +59,11 @@ const ManageSectionContainer = styled(Box)(({ theme }) => ({
   display: "flex",
 }));
 
-//maintaining the connection state
-let socketConnectionState = false;
-
-function FarmNodeManage() {
+function FarmNodeManage({ userId }) {
   const [dialogBox, setDialogBox] = useState(false);
 
   //using socket instance
-  const { socket, isSocketDisconnected } = useSocket();
+  const { isSocketDisconnected } = useSocket();
 
   return (
     <NodeManageContainer>
@@ -70,19 +76,21 @@ function FarmNodeManage() {
             sx={{ width: "100%" }}
           >
             <Box>
-              <IconButton>
-                {isSocketDisconnected ? (
-                  <LinkOffRoundedIcon
-                    color="primary"
-                    sx={{ height: 35, width: 35 }}
-                  />
-                ) : (
-                  <LinkRoundedIcon
-                    color="primary"
-                    sx={{ height: 35, width: 35 }}
-                  />
-                )}
-              </IconButton>
+              <Tooltip title="Socket Connection">
+                <IconButton>
+                  {isSocketDisconnected ? (
+                    <LinkOffRoundedIcon
+                      color="primary"
+                      sx={{ height: 35, width: 35 }}
+                    />
+                  ) : (
+                    <LinkRoundedIcon
+                      color="primary"
+                      sx={{ height: 35, width: 35 }}
+                    />
+                  )}
+                </IconButton>
+              </Tooltip>
             </Box>
             <ManageSectionContainer>
               <SearchContainer>
@@ -116,7 +124,11 @@ function FarmNodeManage() {
         <Route
           path="/nodes/:id"
           element={
-            <NodeGrid dialogBox={dialogBox} setDialogBox={setDialogBox} />
+            <NodeGrid
+              userId={userId}
+              dialogBox={dialogBox}
+              setDialogBox={setDialogBox}
+            />
           }
         />
       </Routes>
